@@ -60,6 +60,7 @@ class Body extends React.Component {
       rowStyle,
       rowClasses,
       rowEvents,
+      rowRenderer,
       expandRow
     } = this.props;
 
@@ -105,7 +106,9 @@ class Body extends React.Component {
         baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
         baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
-        return <this.RowComponent { ...baseRowProps } />;
+        return rowRenderer(
+            <this.RowComponent { ...baseRowProps } />
+        );
       });
     }
 
@@ -119,7 +122,8 @@ Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  selectRow: PropTypes.object
+  selectRow: PropTypes.object,
+  rowRenderer: PropTypes.func.isRequired,
 };
 
 export default Body;

@@ -64,6 +64,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       wrapperClasses,
       rowEvents,
+      rowRenderer,
       selectRow,
       expandRow,
       cellEdit,
@@ -132,6 +133,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
+            rowRenderer={ rowRenderer }
           />
           {hasFooter && (
             <Footer
@@ -221,6 +223,7 @@ BootstrapTable.propTypes = {
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  rowRenderer: PropTypes.func,
   headerClasses: PropTypes.string,
   filtersClasses: PropTypes.string,
   filterPosition: PropTypes.oneOf([
@@ -272,6 +275,7 @@ BootstrapTable.defaultProps = {
     expanded: [],
     nonExpandable: []
   },
+  rowRenderer: (component => component),
   cellEdit: {
     mode: null,
     nonEditableRows: []
